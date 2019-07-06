@@ -5,9 +5,8 @@
   "scripts": {
     "ng": "ng",
     "postinstall": "ngc -p ./angular-metadata.tsconfig.json",
-    "start": "ng serve --host 0.0.0.0",
-    "start-localhost": "ng serve",
-    "build": "ng build",
+    "start": "ng serve",
+    "build": "ng build --leaveBazelFilesOnDisk",
     "test": "ng test",
     "lint": "nx lint && ng lint",
     "e2e": "ng e2e",

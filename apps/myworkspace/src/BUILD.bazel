@@ -72,7 +72,7 @@ web_package(
 history_server(
     name = "prodserver",
     data = [":prodapp"],
-    templated_args = ["src/prodapp"],
+    templated_args = ["apps/myworkspace/src/prodapp"],
 )
 
 filegroup(
@@ -87,7 +87,7 @@ filegroup(
 ts_devserver(
     name = "devserver",
     port = 4200,
-    entry_module = "project/src/main.dev",
+    entry_module = "project/apps/myworkspace/src/main.dev",
     serving_path = "/bundle.min.js",
     scripts = [
         "@npm//:node_modules/tslib/tslib.js",
