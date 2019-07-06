@@ -1,3 +1,5 @@
+// This is a backup file of the original angular.json. This file is needed in case you want to revert to the workflow without Bazel.
+
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
@@ -15,27 +17,55 @@
       "prefix": "myworkspace",
       "architect": {
         "build": {
-          "builder": "@angular/bazel:build",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "targetLabel": "//apps/myworkspace/src:prodapp",
-            "bazelCommand": "build"
+            "outputPath": "dist/apps/myworkspace",
+            "index": "apps/myworkspace/src/index.html",
+            "main": "apps/myworkspace/src/main.ts",
+            "polyfills": "apps/myworkspace/src/polyfills.ts",
+            "tsConfig": "apps/myworkspace/tsconfig.app.json",
+            "assets": [
+              "apps/myworkspace/src/favicon.ico",
+              "apps/myworkspace/src/assets"
+            ],
+            "styles": ["apps/myworkspace/src/styles.scss"],
+            "scripts": []
           },
           "configurations": {
             "production": {
-              "targetLabel": "//apps/myworkspace/src:prodapp"
+              "fileReplacements": [
+                {
+                  "replace": "apps/myworkspace/src/environments/environment.ts",
+                  "with": "apps/myworkspace/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
             }
           }
         },
         "serve": {
-          "builder": "@angular/bazel:build",
+          "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "targetLabel": "//apps/myworkspace/src:devserver",
-            "bazelCommand": "run",
-            "watch": true
+            "browserTarget": "myworkspace:build"
           },
           "configurations": {
             "production": {
-              "targetLabel": "//apps/myworkspace/src:prodserver"
+              "browserTarget": "myworkspace:build:production"
             }
           }
         },
