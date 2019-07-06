@@ -130,10 +130,12 @@
   },
   "schematics": {
     "@nrwl/angular:application": {
-      "unitTestRunner": "jest",
-      "e2eTestRunner": "cypress"
+        "e2eTestRunner": "cypress",
+        "style": "scss",
+      "unitTestRunner": "jest"
     },
     "@nrwl/angular:library": {
+        "style": "scss",
       "unitTestRunner": "jest"
     }
   },
